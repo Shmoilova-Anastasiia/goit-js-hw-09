@@ -13,6 +13,7 @@ const refs = {
 let intervalId = null;
 let selectedDate = null;
 let currentDate = null;
+let leftTime = 0;
 
 refs.btnStart.setAttribute('disabled',true);
 refs.btnStart.addEventListener('click', onClickStart)
@@ -49,18 +50,16 @@ function onClickStart() {
   currentDate = new Date().getTime(); 
   if (selectedDate - currentDate <= 1000) {
     clearInterval(intervalId);
-    // refs.btnStart.setAttribute('disabled',true);
     refs.inputDate.removeAttribute('disabled');
     Report.info(
       'Timer stopped!',
     );
     return
   } else {
-    // refs.btnStart.setAttribute('disabled',true);
     refs.inputDate.setAttribute('disabled',true);
     currentDate += 1000;
-    remainingTime = Math.floor(selectedDate - currentDate);
-    convertMs(remainingTime);
+    leftTime = Math.floor(selectedDate - currentDate);
+    convertMs(leftTime );
   }
   },1000)
 };
